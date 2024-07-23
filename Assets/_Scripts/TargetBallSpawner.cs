@@ -19,6 +19,7 @@ public class TargetBallSpawner : MonoBehaviour
 
     public int targetCount;
     private string[] tags = { "Blue", "Green", "Red", "Yellow" };
+    private int colorIndex;
     private GameObject target;
     private Text targetCountText;
 
@@ -31,8 +32,9 @@ public class TargetBallSpawner : MonoBehaviour
     }
     
     void SpawnRandomBall()
-    {        
-        int colorIndex = Random.Range(0, coloredMaterials.Length);
+    {    
+        GetRandomNumber();
+
         ballPrefab.GetComponent<MeshRenderer>().material = coloredMaterials[colorIndex];
         ballPrefab.gameObject.tag = tags[colorIndex];
 
@@ -41,6 +43,20 @@ public class TargetBallSpawner : MonoBehaviour
         StartCoroutine("ShowTargetCount");
 
         target = Instantiate(ballPrefab, transform.position, ballPrefab.transform.rotation);        
+    }
+
+    int GetRandomNumber()
+    {
+        int newIndex = Random.Range(0, coloredMaterials.Length);        
+
+        while (newIndex == colorIndex)
+        {
+            newIndex = Random.Range(0, coloredMaterials.Length);
+        }
+
+        colorIndex = newIndex;
+
+        return colorIndex;
     }
 
     IEnumerator ShowTargetCount()
