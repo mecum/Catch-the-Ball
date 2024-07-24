@@ -9,7 +9,7 @@ public class BallSpawner : MonoBehaviour
     public int xRange;
 
     public float startDelay = 2.0f;
-    private float spawnInterval;
+    private float spawnInterval = 1.5f;
 
     private int newIndex;
 
