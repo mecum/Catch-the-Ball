@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class BallSpawner : MonoBehaviour
 {
-    public GameObject[] ballPrefabs;
-    public GameManager GameManager;
-    public int xRange;
-
-    public float startDelay = 2.0f;
+    [SerializeField] GameObject[] ballPrefabs;
+    [SerializeField] LevelManager LevelManager;
+    [SerializeField] int xRange;
+        
     private float spawnInterval = 1.5f;
 
     private int newIndex;
@@ -19,14 +18,14 @@ public class BallSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isGameActive = GameManager.isGameActive;
+        isGameActive = LevelManager.isGameActive;
 
         StartCoroutine(SpawnBalls());
     }    
 
     IEnumerator SpawnBalls()
     {
-        while (GameManager.isGameActive == true)
+        while (isGameActive == true)
         {
             int ballIndex = GetRandomNumber();
 
@@ -68,5 +67,4 @@ public class BallSpawner : MonoBehaviour
             return 0.5f;
         }        
     }
-
 }
