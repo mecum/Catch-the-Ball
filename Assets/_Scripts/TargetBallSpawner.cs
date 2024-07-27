@@ -6,22 +6,24 @@ using UnityEngine.UI;
 
 public class TargetBallSpawner : MonoBehaviour
 {
-    public GameObject ballPrefab;
-    public Material[] coloredMaterials;
-    
-    public float startDelay = 0.5f;
-    public GameObject targetText;
-
-    public AudioClip newTargetSound;
-    private AudioSource targetAudio;
-
-    public ParticleSystem destroyParticle;
-
-    public int targetCount;
+    [SerializeField] GameObject ballPrefab;
+    [SerializeField] Material[] coloredMaterials;
     private string[] tags = { "Blue", "Green", "Red", "Yellow" };
     private int colorIndex;
-    private GameObject target;
+    [SerializeField] int minTargetRange;
+    [SerializeField] int maxTargetRange;
+
+    [SerializeField] GameObject targetText;
     private Text targetCountText;
+
+    [SerializeField] AudioClip newTargetSound;
+    private AudioSource targetAudio;
+
+    [SerializeField] ParticleSystem destroyParticle;
+
+    public int targetCount { get; private set; }
+        
+    private GameObject target;    
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +40,7 @@ public class TargetBallSpawner : MonoBehaviour
         ballPrefab.GetComponent<MeshRenderer>().material = coloredMaterials[colorIndex];
         ballPrefab.gameObject.tag = tags[colorIndex];
 
-        targetCount = Random.Range(1, 3);
+        targetCount = Random.Range(minTargetRange, maxTargetRange);
         
         StartCoroutine("ShowTargetCount");
 

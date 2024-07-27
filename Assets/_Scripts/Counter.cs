@@ -7,20 +7,10 @@ using UnityEngine.UI;
 
 public class Counter : MonoBehaviour
 { 
-    public GameManager GameManager;
+    [SerializeField] LevelManager LevelManager;
         
     private string currentTag;
-
-    private void Start()
-    {
-                
-    }
-
-    private void Update()
-    {
         
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         GameObject target = GameObject.Find("Target Ball(Clone)");
@@ -28,11 +18,11 @@ public class Counter : MonoBehaviour
 
         if (other.CompareTag(currentTag))
         {            
-            GameManager.CalculateCollision();
+            LevelManager.CalculateCollision();
         }
         else
         {
-            GameManager.DecreaseLives();
+            LevelManager.DecreaseLives();
         }
 
         Destroy(other.gameObject);
