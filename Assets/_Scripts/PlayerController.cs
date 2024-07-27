@@ -67,21 +67,4 @@ public class PlayerController : MonoBehaviour
             transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        GameObject target = GameObject.Find("Target Ball(Clone)");
-        currentTag = target.tag;
-
-        if (other.CompareTag(currentTag))
-        {
-            LevelManager.CalculateCollision();
-        }
-        else
-        {
-            LevelManager.DecreaseLives();
-        }
-
-        Destroy(other.gameObject);
-    }
 }
