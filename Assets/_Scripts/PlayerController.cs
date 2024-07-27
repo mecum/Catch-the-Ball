@@ -15,6 +15,11 @@ public class PlayerController : MonoBehaviour
     {
         isGameActive = LevelManager.isGameActive;
     }
+
+    private void Update()
+    {
+        isGameActive = LevelManager.isGameActive;
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -30,10 +35,37 @@ public class PlayerController : MonoBehaviour
                 transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
             }
 
-            horizontalInput = Input.GetAxis("Horizontal");                   
+            horizontalInput = Input.GetAxis("Horizontal");
 
             transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
-        }       
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject target = GameObject.Find("Target Ball(Clone)");
+        currentTag = target.tag;
+
+        if (other.CompareTag(currentTag))
+        {
+            LevelManager.CalculateCollision();
+        }
+        else
+        {
+            LevelManager.DecreaseLives();
+        }
+
+        if (transform.position.x > xRange)
+        {
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+        }
+
+        horizontalInput = Input.GetAxis("Horizontal");
+
+        if (isGameActive)
+        {
+            transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

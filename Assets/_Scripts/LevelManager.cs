@@ -5,43 +5,48 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public Text LivesCount;
-    public Text ScoreCount;
-    public GameObject gameOverScreen;    
+    [SerializeField] Text LivesCount;
+    private int lives;
+    [SerializeField] Text ScoreCount;
+    private int score;
+    private int subScore;
 
-    public GameObject targetSpawner;    
-    public bool isGameActive = true;
-    public ParticleSystem gameOverParticle;
+    [SerializeField] GameObject gameOverScreen;
+    public bool isGameActive {get; private set;}
+    [SerializeField] ParticleSystem gameOverParticle;
 
-    public AudioClip looseClip;
-    public AudioClip countClip;
-    public AudioClip scoreClip;
-    public AudioClip wrongBallClip;
+    [SerializeField] GameObject targetSpawner;    
+
+    [SerializeField] AudioClip looseClip;
+    [SerializeField] AudioClip countClip;
+    [SerializeField] AudioClip scoreClip;
+    [SerializeField] AudioClip wrongBallClip;
     private AudioSource gameAudio;
 
-    private int lives;
-    private int score;
-    public int subScore;
+    private void Awake()
+    {
+        isGameActive = true;
+
+        gameAudio = GetComponent<AudioSource>();
+    }
 
     // Start is called before the first frame update
     void Start()
-    {            
-        lives = 3;        
+    {  
+        lives = 3;
         LivesCount.text = lives.ToString();
 
         score = 0;
         ScoreCount.text = score.ToString();
 
-        subScore = 0;
-
-        gameAudio = GetComponent<AudioSource>();
+        subScore = 0;        
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-    }          
+
+    }
 
     public void CalculateCollision()
     {
@@ -64,31 +69,31 @@ public class LevelManager : MonoBehaviour
                 subScore += 1;
                 gameAudio.PlayOneShot(countClip);
             }
-        }               
+        }
     }
 
     public void DecreaseLives()
     {
         lives -= 1;
 
+        gameAudio.PlayOneShot(wrongBallClip);
+        LivesCount.text = lives.ToString();
+
         if (lives == 2)
-        {            
+        {
             LivesCount.color = Color.yellow;
         }
-        else if(lives == 1)
+        else if (lives == 1)
         {
             LivesCount.color = Color.red;
         }
         else if (lives == 0)
         {
-            LivesCount.color = Color.black;            
+            LivesCount.color = Color.black;
             gameAudio.PlayOneShot(looseClip);
             gameOverParticle.Play();
             isGameActive = false;
             gameOverScreen.SetActive(true);
-        }
-
-        gameAudio.PlayOneShot(wrongBallClip);
-        LivesCount.text = lives.ToString();
+        }        
     }
 }
