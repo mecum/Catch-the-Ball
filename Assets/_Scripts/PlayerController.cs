@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 20;
+    [SerializeField] LevelManager LevelManager;
+    [SerializeField] float speed = 15;
     private float horizontalInput;
-    private float xRange = 7;   
+    private float xRange = 7;
+    private bool isGameActive;
+    private string currentTag;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        isGameActive = LevelManager.isGameActive;
     }
 
+    private void Update()
+    {
+        isGameActive = LevelManager.isGameActive;
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -28,8 +34,27 @@ public class PlayerController : MonoBehaviour
         }
 
         horizontalInput = Input.GetAxis("Horizontal");
-        //transform.Translate(Vector3.right * horizontalInput * speed * Time.deltaTime);        
 
-        transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
-    }    
+        if (isGameActive)
+        {
+            transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
+        }   
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject target = GameObject.Find("Target Ball(Clone)");
+        currentTag = target.tag;
+
+        if (other.CompareTag(currentTag))
+        {
+            LevelManager.CalculateCollision();
+        }
+        else
+        {
+            LevelManager.DecreaseLives();
+        }
+
+        Destroy(other.gameObject);
+    }
 }
