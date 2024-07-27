@@ -5188,7 +5188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb2a7dac0556f904b9b573c389e53301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelManager: {fileID: 1472054398}
+  LevelManager: {fileID: 1472054401}
   speed: 15
 --- !u!65 &145979414
 BoxCollider:
@@ -7101,8 +7101,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1472054399}
-  - component: {fileID: 1472054398}
   - component: {fileID: 1472054400}
+  - component: {fileID: 1472054401}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -7110,29 +7110,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1472054398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472054397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 225df8384b2f1264394b5d3dd655d6e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LivesCount: {fileID: 1790867832}
-  ScoreCount: {fileID: 598753586}
-  gameOverScreen: {fileID: 1204397939}
-  targetSpawner: {fileID: 254401673}
-  isGameActive: 1
-  gameOverParticle: {fileID: 125519868}
-  looseClip: {fileID: 8300000, guid: 1e4d3fe750fadf44c95275adf0c67185, type: 3}
-  countClip: {fileID: 8300000, guid: bc8bfa8ed23c1144abd820a21e156e68, type: 3}
-  scoreClip: {fileID: 8300000, guid: 3791624baa416314dabada3c3ede977e, type: 3}
-  wrongBallClip: {fileID: 8300000, guid: b3084bd01d66ce247ad4cf227f993675, type: 3}
-  subScore: 0
 --- !u!4 &1472054399
 Transform:
   m_ObjectHideFlags: 0
@@ -7244,6 +7221,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1472054401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472054397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07ef9ad6889bcf49a6696ae88eb769a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LivesCount: {fileID: 1790867832}
+  ScoreCount: {fileID: 598753586}
+  gameOverScreen: {fileID: 1204397939}
+  targetSpawner: {fileID: 254401673}
+  isGameActive: 1
+  gameOverParticle: {fileID: 125519868}
+  looseClip: {fileID: 8300000, guid: 1e4d3fe750fadf44c95275adf0c67185, type: 3}
+  countClip: {fileID: 8300000, guid: bc8bfa8ed23c1144abd820a21e156e68, type: 3}
+  scoreClip: {fileID: 8300000, guid: 3791624baa416314dabada3c3ede977e, type: 3}
+  wrongBallClip: {fileID: 8300000, guid: b3084bd01d66ce247ad4cf227f993675, type: 3}
+  subScore: 0
 --- !u!1 &1564246827
 GameObject:
   m_ObjectHideFlags: 0
@@ -7988,6 +7988,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1101357784}
     - target: {fileID: 476731650045586583, guid: f0b02d4b828de8443940917ebe6e251b, type: 3}
+      propertyPath: maxTargetRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 476731650045586583, guid: f0b02d4b828de8443940917ebe6e251b, type: 3}
+      propertyPath: minTargetRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 476731650045586583, guid: f0b02d4b828de8443940917ebe6e251b, type: 3}
       propertyPath: destroyParticle
       value: 
       objectReference: {fileID: 417302760}
@@ -8055,7 +8063,11 @@ PrefabInstance:
     - target: {fileID: 344672023813431186, guid: 573d7fb7c629d954190e5ddee13bb92c, type: 3}
       propertyPath: GameManager
       value: 
-      objectReference: {fileID: 1472054398}
+      objectReference: {fileID: 0}
+    - target: {fileID: 344672023813431186, guid: 573d7fb7c629d954190e5ddee13bb92c, type: 3}
+      propertyPath: LevelManager
+      value: 
+      objectReference: {fileID: 1472054401}
     - target: {fileID: 344672023813431186, guid: 573d7fb7c629d954190e5ddee13bb92c, type: 3}
       propertyPath: spawnInterval
       value: 1.5
@@ -8122,5 +8134,5 @@ SceneRoots:
   - {fileID: 480852533}
   - {fileID: 4728536057773918411}
   - {fileID: 2199071278946824599}
-  - {fileID: 1472054399}
   - {fileID: 1053144563403867834}
+  - {fileID: 1472054399}
