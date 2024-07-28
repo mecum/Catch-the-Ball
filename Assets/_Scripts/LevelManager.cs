@@ -42,12 +42,6 @@ public class LevelManager : MonoBehaviour
         subScore = 0;        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void CalculateCollision()
     {
         int targetCount = targetSpawner.GetComponent<TargetBallSpawner>().targetCount;

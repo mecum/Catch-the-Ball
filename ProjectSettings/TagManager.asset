@@ -8,6 +8,7 @@ TagManager:
   - Green
   - Blue
   - Yellow
+  - Plane
   layers:
   - Default
   - TransparentFX
