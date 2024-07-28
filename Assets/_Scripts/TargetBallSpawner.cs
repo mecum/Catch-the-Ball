@@ -10,6 +10,7 @@ public class TargetBallSpawner : MonoBehaviour
     [SerializeField] Material[] coloredMaterials;
     private string[] tags = { "Blue", "Green", "Red", "Yellow" };
     private int colorIndex;
+
     [SerializeField] int minTargetRange;
     [SerializeField] int maxTargetRange;
 
