@@ -5278,7 +5278,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1899638126}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: CloseGame
+        m_MethodName: LoadLevelMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7397,6 +7397,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4822211324859678238, guid: 4873a3c2aaec72840b2835ae548da18b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.487
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249830138929608535, guid: 4873a3c2aaec72840b2835ae548da18b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.475
+      objectReference: {fileID: 0}
+    - target: {fileID: 5439961389549312192, guid: 4873a3c2aaec72840b2835ae548da18b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 5665538472055112385, guid: 4873a3c2aaec72840b2835ae548da18b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.39

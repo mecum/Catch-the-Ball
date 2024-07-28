@@ -88,6 +88,12 @@ public class LevelManager : MonoBehaviour
             gameOverParticle.Play();
             isGameActive = false;
             gameOverScreen.SetActive(true);
+            SaveScore();
         }        
+    }
+
+    public void SaveScore()
+    {
+        GameManager.Instance.score8 = score;
     }
 }

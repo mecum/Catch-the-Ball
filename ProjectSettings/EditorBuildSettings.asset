@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu Scene.unity
     guid: c2e44fffd5b4fca49bf7c7dc8179181e
   - enabled: 1
+    path: Assets/Scenes/Level Menu.unity
+    guid: 9cb714a7d14df7c4aaac71bf581169ae
+  - enabled: 1
     path: Assets/Scenes/Infinite Level.unity
     guid: c237548c21a57894dae9921c31ea3055
   m_configObjects: {}

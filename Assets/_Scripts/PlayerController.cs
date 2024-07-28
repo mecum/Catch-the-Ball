@@ -23,20 +23,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        while (isGameActive)
+        if (transform.position.x < -xRange)
         {
-            if (transform.position.x < -xRange)
-            {
-                transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
-            }
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+        }
 
-            if (transform.position.x > xRange)
-            {
-                transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
-            }
+        if (transform.position.x > xRange)
+        {
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+        }
 
-            horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxis("Horizontal");
 
+        if (isGameActive)
+        {
             transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
         }
     }
@@ -55,16 +55,6 @@ public class PlayerController : MonoBehaviour
             LevelManager.DecreaseLives();
         }
 
-        if (transform.position.x > xRange)
-        {
-            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
-        }
-
-        horizontalInput = Input.GetAxis("Horizontal");
-
-        if (isGameActive)
-        {
-            transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
-        }
+        Destroy(other.gameObject);
     }
 }

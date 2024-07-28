@@ -24,8 +24,7 @@ public class Balls : MonoBehaviour
                 gameAudio.PlayOneShot(ballClip);
                 isFirstCollision = false;
             }
-        }       
-        
+        }  
     }
 
     // Update is called once per frame
