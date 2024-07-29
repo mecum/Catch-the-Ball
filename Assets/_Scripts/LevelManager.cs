@@ -11,6 +11,10 @@ public class LevelManager : MonoBehaviour
     private int score;
     private int subScore;
 
+    public Text winScoreText;
+    public int winScore;
+    [SerializeField] GameObject gameWinScreen;
+
     [SerializeField] GameObject gameOverScreen;
     public bool isGameActive {get; private set;}
     [SerializeField] ParticleSystem gameOverParticle;
@@ -26,7 +30,7 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         isGameActive = true;
-
+        GameManager.Instance.difficulty += 1;
         gameAudio = GetComponent<AudioSource>();
     }
 
@@ -39,7 +43,10 @@ public class LevelManager : MonoBehaviour
         score = 0;
         ScoreCount.text = score.ToString();
 
-        subScore = 0;        
+        subScore = 0;
+
+        winScore = 3 * GameManager.Instance.difficulty;
+        winScoreText.text = winScore.ToString();
     }
 
     public void CalculateCollision()
@@ -55,14 +62,23 @@ public class LevelManager : MonoBehaviour
                 gameAudio.PlayOneShot(scoreClip);
                 ScoreCount.text = score.ToString();
                 subScore = 0;
-
+                
                 targetSpawner.GetComponent<TargetBallSpawner>().RespawnTargetBall();
+                CheckWin();
             }
             else
             {
                 subScore += 1;
                 gameAudio.PlayOneShot(countClip);
             }
+        }
+    }
+
+    void CheckWin()
+    {
+        if (score == winScore)
+        {
+            GameWon();
         }
     }
 
@@ -84,12 +100,32 @@ public class LevelManager : MonoBehaviour
         else if (lives == 0)
         {
             LivesCount.color = Color.black;
-            gameAudio.PlayOneShot(looseClip);
-            gameOverParticle.Play();
-            isGameActive = false;
-            gameOverScreen.SetActive(true);
-            SaveScore();
+            GameOver();
         }        
+    }
+
+    void GameWon()
+    {
+        isGameActive = false;        
+        gameWinScreen.SetActive(true);
+
+        if (GameManager.Instance.difficulty == 3)
+        {
+            SaveScore();
+        }
+        else
+        {
+            GameManager.Instance.difficulty += 1;
+        }        
+    }
+
+    void GameOver()
+    {
+        gameAudio.PlayOneShot(looseClip);
+        gameOverParticle.Play();
+        isGameActive = false;
+        gameOverScreen.SetActive(true);
+        SaveScore();
     }
 
     public void SaveScore()
