@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     public int difficulty = 0;
     public int score8;
+    
 
     private void Awake()
     {

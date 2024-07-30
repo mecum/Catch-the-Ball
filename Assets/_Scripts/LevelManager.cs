@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,11 @@ public class LevelManager : MonoBehaviour
     public Text winScoreText;
     public int winScore;
     [SerializeField] GameObject gameWinScreen;
+
+    private bool isTimeBound = false;
+    public float timeLeft;
+    [SerializeField] Text timeText;
+    [SerializeField] GameObject timeIsOver;
 
     [SerializeField] GameObject gameOverScreen;
     public bool isGameActive {get; private set;}
@@ -30,7 +36,11 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         isGameActive = true;
-        GameManager.Instance.difficulty += 1;
+
+        if (GameManager.Instance.difficulty < 3)
+        {
+            GameManager.Instance.difficulty += 1;
+        }        
         gameAudio = GetComponent<AudioSource>();
     }
 
@@ -45,8 +55,33 @@ public class LevelManager : MonoBehaviour
 
         subScore = 0;
 
-        winScore = 3 * GameManager.Instance.difficulty;
+        winScore = 2 * GameManager.Instance.difficulty;
         winScoreText.text = winScore.ToString();
+
+        if (GameManager.Instance.difficulty == 3)
+        {
+           isTimeBound = true;
+        }
+    }
+
+    private void Update()
+    {
+        if (isTimeBound)
+        {
+            if (timeLeft > 0)
+            {
+                timeLeft -= Time.deltaTime;
+            }
+            else
+            {
+                isTimeBound = false;
+                GameWon();
+            }
+
+            int timer = Mathf.RoundToInt(timeLeft);
+            timeText.gameObject.SetActive(true);
+            timeText.text = timer.ToString();
+        }        
     }
 
     public void CalculateCollision()
@@ -111,21 +146,18 @@ public class LevelManager : MonoBehaviour
 
         if (GameManager.Instance.difficulty == 3)
         {
-            SaveScore();
-        }
-        else
-        {
-            GameManager.Instance.difficulty += 1;
-        }        
+            timeIsOver.SetActive(true);
+            SaveScore();            
+        }                
     }
 
     void GameOver()
-    {
-        gameAudio.PlayOneShot(looseClip);
-        gameOverParticle.Play();
+    {        
         isGameActive = false;
         gameOverScreen.SetActive(true);
-        SaveScore();
+        gameAudio.PlayOneShot(looseClip);
+        gameOverParticle.Play();
+        GameManager.Instance.difficulty -= 1;                
     }
 
     public void SaveScore()

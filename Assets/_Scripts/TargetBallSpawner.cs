@@ -35,19 +35,30 @@ public class TargetBallSpawner : MonoBehaviour
         SpawnRandomBall();
         targetAudio = GetComponent<AudioSource>();
     }
-    
+
+    private void Update()
+    {
+        if (GameObject.Find("Level Manager").GetComponent<LevelManager>().isGameActive == false)
+        {
+            StopAllCoroutines();
+        }
+    }
+
     void SpawnRandomBall()
-    {    
-        GetRandomNumber();
+    {   
+        if (GameObject.Find("Level Manager").GetComponent<LevelManager>().isGameActive)
+        {
+            GetRandomNumber();
 
-        ballPrefab.GetComponent<MeshRenderer>().material = coloredMaterials[colorIndex];
-        ballPrefab.gameObject.tag = tags[colorIndex];
+            ballPrefab.GetComponent<MeshRenderer>().material = coloredMaterials[colorIndex];
+            ballPrefab.gameObject.tag = tags[colorIndex];
 
-        GetTargetCount();        
-        
-        StartCoroutine("ShowTargetCount");
+            GetTargetCount();
 
-        target = Instantiate(ballPrefab, transform.position, ballPrefab.transform.rotation);        
+            StartCoroutine("ShowTargetCount");
+
+            target = Instantiate(ballPrefab, transform.position, ballPrefab.transform.rotation);
+        }       
     }
 
     int GetRandomNumber()

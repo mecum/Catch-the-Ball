@@ -18,7 +18,7 @@ public class LevelMenuController : MonoBehaviour
     {
         score8 = GameManager.Instance.score8;
         diff = GameManager.Instance.difficulty;
-        if (diff > 1)
+        if (diff > 0)
         {
             ShowStars();
         }        
@@ -36,12 +36,9 @@ public class LevelMenuController : MonoBehaviour
     
     void ShowStars()
     {
-        if (diff >= 1)
+        for (int i = 0; i < (diff); i++)
         {
-            for (int i = 0; i < (diff - 1); i++)
-            {
-                stars[i].SetActive(true);
-            }
+            stars[i].SetActive(true);
         }
     }
 
