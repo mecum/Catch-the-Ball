@@ -35,8 +35,7 @@ public class Balls : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //isGameActive = GameObject.Find("Level Manager").GetComponent<LevelManager>().isGameActive;
+             
 
         if (GameObject.Find("Level Manager") != null && GameObject.Find("Level Manager").GetComponent<LevelManager>().isGameActive == false)
         {

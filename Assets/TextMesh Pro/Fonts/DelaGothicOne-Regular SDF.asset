@@ -70,7 +70,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.3
+    - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
@@ -102,7 +102,7 @@ Material:
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlowColor: {r: 0, g: 1, b: 0, a: 0.5}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
@@ -124,8 +124,8 @@ MonoBehaviour:
   material: {fileID: -8089062222055926582}
   materialHashCode: -2035762768
   m_Version: 1.1.0
-  m_SourceFontFileGUID: 0a63c6221ccef2f4aa604374c4393a8a
-  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 0a63c6221ccef2f4aa604374c4393a8a, type: 3}
+  m_SourceFontFileGUID: 37ada2bbe335de3439e63784db114460
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 37ada2bbe335de3439e63784db114460, type: 3}
   m_SourceFontFile: {fileID: 12800000, guid: 0a63c6221ccef2f4aa604374c4393a8a, type: 3}
   m_AtlasPopulationMode: 1
   m_FaceInfo:

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
+    public int levelsNumber;
+    public bool lastLevel;
+    private int difficulty;
     [SerializeField] Text LivesCount;
     private int lives;
     [SerializeField] Text ScoreCount;
@@ -37,9 +40,11 @@ public class LevelManager : MonoBehaviour
     {
         isGameActive = true;
 
-        if (GameManager.Instance.difficulty < 3)
+        difficulty = GameManager.Instance.difficulties[levelsNumber - 1];
+
+        if (difficulty < 3)
         {
-            GameManager.Instance.difficulty += 1;
+            difficulty += 1;
         }        
         gameAudio = GetComponent<AudioSource>();
     }
@@ -55,10 +60,13 @@ public class LevelManager : MonoBehaviour
 
         subScore = 0;
 
-        winScore = 2 * GameManager.Instance.difficulty;
-        winScoreText.text = winScore.ToString();
+        if (!lastLevel)
+        {
+            winScore = 2 * difficulty;
+            winScoreText.text = winScore.ToString();
+        }        
 
-        if (GameManager.Instance.difficulty == 3)
+        if (difficulty == 3)
         {
            isTimeBound = true;
         }
@@ -99,7 +107,11 @@ public class LevelManager : MonoBehaviour
                 subScore = 0;
                 
                 targetSpawner.GetComponent<TargetBallSpawner>().RespawnTargetBall();
-                CheckWin();
+
+                if (!lastLevel)
+                {
+                    CheckWin();
+                }                
             }
             else
             {
@@ -144,11 +156,13 @@ public class LevelManager : MonoBehaviour
         isGameActive = false;        
         gameWinScreen.SetActive(true);
 
-        if (GameManager.Instance.difficulty == 3)
+        if (difficulty == 3)
         {
             timeIsOver.SetActive(true);
             SaveScore();            
-        }                
+        }   
+
+        SaveDifficulty();
     }
 
     void GameOver()
@@ -157,11 +171,23 @@ public class LevelManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         gameAudio.PlayOneShot(looseClip);
         gameOverParticle.Play();
-        GameManager.Instance.difficulty -= 1;                
+        difficulty -= 1;
+        SaveDifficulty();
+
+        if (lastLevel)
+        {
+            SaveScore();
+        }
+    }
+
+    void SaveDifficulty()
+    {
+        GameManager.Instance.difficulties[levelsNumber - 1] = difficulty;
+
     }
 
     public void SaveScore()
     {
-        GameManager.Instance.score8 = score;
+        GameManager.Instance.scores[levelsNumber - 1] = score;
     }
 }
