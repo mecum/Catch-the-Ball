@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 332aef8d4ffd40a4aa60a501ccc8013d, type: 2}
+  - {fileID: 2100000, guid: a7be251e37b0015469f786036a9af1b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -146,3 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac32fce04d0335e44a36af10b266c4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballClip: {fileID: 0}
+  isFirstCollision: 1
+  isGameActive: 0

@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballClip: {fileID: 8300000, guid: b6f48123e868fb64d8af1c3f8fcd2a36, type: 3}
+  isFirstCollision: 1
+  isGameActive: 0
 --- !u!82 &-8918950673018185552
 AudioSource:
   m_ObjectHideFlags: 0

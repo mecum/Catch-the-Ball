@@ -9,6 +9,8 @@ TagManager:
   - Blue
   - Yellow
   - Plane
+  - Orange
+  - Purple
   layers:
   - Default
   - TransparentFX

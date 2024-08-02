@@ -6610,8 +6610,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07ef9ad6889bcf49a6696ae88eb769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelsNumber: 8
+  lastLevel: 1
   LivesCount: {fileID: 1790867832}
   ScoreCount: {fileID: 598753586}
+  winScoreText: {fileID: 0}
+  winScore: 0
+  gameWinScreen: {fileID: 0}
+  timeLeft: 0
+  timeText: {fileID: 0}
+  timeIsOver: {fileID: 0}
   gameOverScreen: {fileID: 1204397939}
   gameOverParticle: {fileID: 125519868}
   targetSpawner: {fileID: 254401673}

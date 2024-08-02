@@ -6,13 +6,17 @@ using UnityEngine.UI;
 
 public class TargetBallSpawner : MonoBehaviour
 {
+    [SerializeField] bool isSpecial;
+    [SerializeField] GameObject[] animalPrefabs;
+
     [SerializeField] GameObject ballPrefab;
     [SerializeField] Material[] coloredMaterials;
-    private string[] tags = { "Blue", "Green", "Red", "Yellow" };
+    private string[] tags = { "Blue", "Green", "Red", "Yellow", "Orange", "Purple", };
     private int colorIndex;
 
     [SerializeField] int minTargetRange;
     [SerializeField] int maxTargetRange;
+    private int difficulty;
 
     [SerializeField] GameObject targetText;
     private Text targetCountText;
@@ -24,42 +28,110 @@ public class TargetBallSpawner : MonoBehaviour
 
     public int targetCount { get; private set; }
         
-    private GameObject target;    
+    private GameObject target;
+    private int level;
 
     // Start is called before the first frame update
     void Start()
     {
         targetCountText = targetText.GetComponent<Text>();
-        SpawnRandomBall();
+        level = GameObject.Find("Level Manager").GetComponent<LevelManager>().levelsNumber;
+
+        if (GameObject.Find("Level Manager").GetComponent<LevelManager>().lastLevel)
+        {
+            difficulty = 3;
+        }
+        else
+        {
+            difficulty = GameManager.Instance.difficulties[level - 1];
+        }
+        
+        if (isSpecial)
+        {
+            SpawnRandomAnimal();
+        }
+        else
+        {
+            SpawnRandomBall();
+        }
+        
         targetAudio = GetComponent<AudioSource>();
     }
-    
-    void SpawnRandomBall()
-    {    
-        GetRandomNumber();
 
-        ballPrefab.GetComponent<MeshRenderer>().material = coloredMaterials[colorIndex];
-        ballPrefab.gameObject.tag = tags[colorIndex];
-
-        targetCount = Random.Range(minTargetRange, maxTargetRange);
-        
-        StartCoroutine("ShowTargetCount");
-
-        target = Instantiate(ballPrefab, transform.position, ballPrefab.transform.rotation);        
+    private void Update()
+    {
+        if (GameObject.Find("Level Manager").GetComponent<LevelManager>().isGameActive == false)
+        {
+            StopAllCoroutines();
+        }
     }
 
-    int GetRandomNumber()
+    void SpawnRandomBall()
+    {   
+        if (GameObject.Find("Level Manager").GetComponent<LevelManager>().isGameActive)
+        {
+            GetRandomNumber(coloredMaterials.Length);
+
+            ballPrefab.GetComponent<MeshRenderer>().material = coloredMaterials[colorIndex];
+            ballPrefab.gameObject.tag = tags[colorIndex];
+
+            GetTargetCount();
+
+            StartCoroutine("ShowTargetCount");
+
+            target = Instantiate(ballPrefab, transform.position, ballPrefab.transform.rotation);
+        }       
+    }
+
+    void SpawnRandomAnimal()
     {
-        int newIndex = Random.Range(0, coloredMaterials.Length);        
+        if (GameObject.Find("Level Manager").GetComponent<LevelManager>().isGameActive)
+        {
+            GetRandomNumber(2);
+
+            animalPrefabs[colorIndex].gameObject.tag = tags[colorIndex];
+
+            GetTargetCount();
+
+            StartCoroutine("ShowTargetCount");
+
+            target = Instantiate(animalPrefabs[colorIndex], transform.position, animalPrefabs[colorIndex].transform.rotation);
+            target.name = "Target Ball(Clone)";
+        }
+    }
+
+    int GetRandomNumber(int range)
+    {
+        int newIndex = Random.Range(0, range);        
 
         while (newIndex == colorIndex)
         {
-            newIndex = Random.Range(0, coloredMaterials.Length);
+            newIndex = Random.Range(0, range);
         }
 
         colorIndex = newIndex;
 
         return colorIndex;
+    }
+
+    int GetTargetCount()
+    {
+        switch(difficulty)
+        {
+            case 0:
+                targetCount = Random.Range(minTargetRange, maxTargetRange);
+                break;
+            case 1:
+                targetCount = Random.Range(minTargetRange, maxTargetRange + 1);
+                break;
+            default:                
+                int i = Random.Range(0, 3);
+                int[] ranges = { 1, 1, 2 };
+                targetCount = ranges[i];
+                break;
+        }        
+
+        return targetCount;
     }
 
     IEnumerator ShowTargetCount()
@@ -77,6 +149,13 @@ public class TargetBallSpawner : MonoBehaviour
         destroyParticle.Play();
         Destroy(target);
 
-        SpawnRandomBall();
+        if (isSpecial)
+        {
+            SpawnRandomAnimal();
+        }
+        else
+        {
+            SpawnRandomBall();
+        }        
     }
 }

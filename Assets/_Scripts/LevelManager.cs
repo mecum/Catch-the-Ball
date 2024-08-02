@@ -1,15 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
+    public int levelsNumber;
+    public bool lastLevel;
+    private int difficulty;
     [SerializeField] Text LivesCount;
     private int lives;
     [SerializeField] Text ScoreCount;
     private int score;
     private int subScore;
+
+    public Text winScoreText;
+    public int winScore;
+    [SerializeField] GameObject gameWinScreen;
+
+    private bool isTimeBound = false;
+    public float timeLeft;
+    [SerializeField] Text timeText;
+    [SerializeField] GameObject timeIsOver;
 
     [SerializeField] GameObject gameOverScreen;
     public bool isGameActive {get; private set;}
@@ -27,6 +40,12 @@ public class LevelManager : MonoBehaviour
     {
         isGameActive = true;
 
+        difficulty = GameManager.Instance.difficulties[levelsNumber - 1];
+
+        if (difficulty < 3)
+        {
+            difficulty += 1;
+        }        
         gameAudio = GetComponent<AudioSource>();
     }
 
@@ -39,7 +58,38 @@ public class LevelManager : MonoBehaviour
         score = 0;
         ScoreCount.text = score.ToString();
 
-        subScore = 0;        
+        subScore = 0;
+
+        if (!lastLevel)
+        {
+            winScore = 2 * difficulty;
+            winScoreText.text = winScore.ToString();
+        }        
+
+        if (difficulty == 3)
+        {
+           isTimeBound = true;
+        }
+    }
+
+    private void Update()
+    {
+        if (isTimeBound)
+        {
+            if (timeLeft > 0)
+            {
+                timeLeft -= Time.deltaTime;
+            }
+            else
+            {
+                isTimeBound = false;
+                GameWon();
+            }
+
+            int timer = Mathf.RoundToInt(timeLeft);
+            timeText.gameObject.SetActive(true);
+            timeText.text = timer.ToString();
+        }        
     }
 
     public void CalculateCollision()
@@ -55,14 +105,27 @@ public class LevelManager : MonoBehaviour
                 gameAudio.PlayOneShot(scoreClip);
                 ScoreCount.text = score.ToString();
                 subScore = 0;
-
+                
                 targetSpawner.GetComponent<TargetBallSpawner>().RespawnTargetBall();
+
+                if (!lastLevel)
+                {
+                    CheckWin();
+                }                
             }
             else
             {
                 subScore += 1;
                 gameAudio.PlayOneShot(countClip);
             }
+        }
+    }
+
+    void CheckWin()
+    {
+        if (score == winScore)
+        {
+            GameWon();
         }
     }
 
@@ -84,16 +147,47 @@ public class LevelManager : MonoBehaviour
         else if (lives == 0)
         {
             LivesCount.color = Color.black;
-            gameAudio.PlayOneShot(looseClip);
-            gameOverParticle.Play();
-            isGameActive = false;
-            gameOverScreen.SetActive(true);
-            SaveScore();
+            GameOver();
         }        
+    }
+
+    void GameWon()
+    {
+        isGameActive = false;        
+        gameWinScreen.SetActive(true);
+
+        if (difficulty == 3)
+        {
+            timeIsOver.SetActive(true);
+            SaveScore();            
+        }   
+
+        SaveDifficulty();
+    }
+
+    void GameOver()
+    {        
+        isGameActive = false;
+        gameOverScreen.SetActive(true);
+        gameAudio.PlayOneShot(looseClip);
+        gameOverParticle.Play();
+        difficulty -= 1;
+        SaveDifficulty();
+
+        if (lastLevel)
+        {
+            SaveScore();
+        }
+    }
+
+    void SaveDifficulty()
+    {
+        GameManager.Instance.difficulties[levelsNumber - 1] = difficulty;
+
     }
 
     public void SaveScore()
     {
-        GameManager.Instance.score8 = score;
+        GameManager.Instance.scores[levelsNumber - 1] = score;
     }
 }
