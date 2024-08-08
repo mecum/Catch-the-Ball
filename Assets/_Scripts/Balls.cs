@@ -5,24 +5,16 @@ using UnityEngine;
 public class Balls : MonoBehaviour
 {
     [SerializeField] AudioClip ballClip;
-    private AudioSource gameAudio;
-
-    public bool isFirstCollision = true;
-    public bool isGameActive;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameAudio = GetComponent<AudioSource>();        
-    }
-
+    
+    private bool isFirstCollision = true;
+         
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Plane")
         {
             if (isFirstCollision)
-            {
-                gameAudio.PlayOneShot(ballClip);
+            {                
+                AudioManager.Instance.PlaySound(ballClip, transform, 1f);
                 isFirstCollision = false;
             }
         }  
@@ -37,7 +29,7 @@ public class Balls : MonoBehaviour
         }
              
 
-        if (GameObject.Find("Level Manager") != null && GameObject.Find("Level Manager").GetComponent<LevelManager>().isGameActive == false)
+        if (GameObject.Find("Level Manager") != null && GameManager.Instance.isGameActive == false)
         {
             Destroy(gameObject);
         }

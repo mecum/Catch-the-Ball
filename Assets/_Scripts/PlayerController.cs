@@ -13,13 +13,14 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        isGameActive = LevelManager.isGameActive;
+        isGameActive = GameManager.Instance.isGameActive;
     }
 
     private void Update()
     {
-        isGameActive = LevelManager.isGameActive;
+        isGameActive = GameManager.Instance.isGameActive;
     }
+
     // Update is called once per frame
     void FixedUpdate()
     {

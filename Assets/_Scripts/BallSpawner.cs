@@ -12,20 +12,18 @@ public class BallSpawner : MonoBehaviour
 
     private int newIndex;
 
-    private bool isGameActive;
+    private bool isGameActive = true;
     private int[] lastIndexes = new int[2];
 
     // Start is called before the first frame update
     void Start()
-    {
-        isGameActive = LevelManager.isGameActive;
-
+    {   
         StartCoroutine(SpawnBalls());
     }
 
     private void Update()
     {
-        isGameActive = LevelManager.isGameActive;
+        isGameActive = GameManager.Instance.isGameActive;
     }
 
     IEnumerator SpawnBalls()

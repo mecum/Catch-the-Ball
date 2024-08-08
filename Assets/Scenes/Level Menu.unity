@@ -174,10 +174,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLevel: 0
-  lastLevel: 0
   doubleDependency: 1
   dependency1: 3
   dependency2: 6
+  fader: {fileID: 135612752}
 --- !u!114 &2528078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +232,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Level 7
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 390406160}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2528079
@@ -1103,6 +1115,103 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112474156}
   m_CullTransparentMesh: 1
+--- !u!1 &135612751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 135612755}
+  - component: {fileID: 135612754}
+  - component: {fileID: 135612753}
+  - component: {fileID: 135612752}
+  m_Layer: 5
+  m_Name: Fader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &135612752
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135612751}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: afdf6faab88402043b7bca347830c958, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &135612753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135612751}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &135612754
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135612751}
+  m_CullTransparentMesh: 1
+--- !u!224 &135612755
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135612751}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 390406159}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.000030517578, y: -0.000030517578}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &149907326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1496,10 +1605,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLevel: 0
-  lastLevel: 0
   doubleDependency: 1
   dependency1: 2
   dependency2: 4
+  fader: {fileID: 135612752}
 --- !u!114 &266270814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1556,6 +1665,18 @@ MonoBehaviour:
           m_StringArgument: Level 5
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 390406160}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &266270815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1576,7 +1697,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d74b43009531c0a45a223470179ec4d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03eb1f617a8481b4ebdf579e4e161945, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2214,6 +2335,7 @@ RectTransform:
   - {fileID: 346057420}
   - {fileID: 1395956267}
   - {fileID: 1010118340}
+  - {fileID: 135612755}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2233,6 +2355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0862e4725a8459445811ac76d95cc3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonSound: {fileID: 8300000, guid: 3fbf67e1f55e16a4581b3d44ce732c04, type: 3}
+  fader: {fileID: 135612752}
 --- !u!1 &433025221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,10 +2938,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLevel: 0
-  lastLevel: 0
   doubleDependency: 1
   dependency1: 3
   dependency2: 5
+  fader: {fileID: 135612752}
 --- !u!114 &470608489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2874,6 +2998,18 @@ MonoBehaviour:
           m_StringArgument: Level 6
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 390406160}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &470608490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2894,7 +3030,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d74b43009531c0a45a223470179ec4d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03eb1f617a8481b4ebdf579e4e161945, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3799,7 +3935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1395956266}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &750821542
@@ -4269,6 +4405,18 @@ MonoBehaviour:
           m_StringArgument: Infinite Level
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 390406160}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &796164089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4321,6 +4469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dependency1: 1
   dependency2: 6
+  fader: {fileID: 135612752}
 --- !u!1 &834653247
 GameObject:
   m_ObjectHideFlags: 0
@@ -5889,6 +6038,18 @@ MonoBehaviour:
           m_StringArgument: Level 2
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 390406160}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1262157306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5940,10 +6101,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLevel: 0
-  lastLevel: 0
   doubleDependency: 0
   dependency1: 1
   dependency2: 0
+  fader: {fileID: 135612752}
 --- !u!1 &1299053424
 GameObject:
   m_ObjectHideFlags: 0
@@ -6148,10 +6309,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLevel: 0
-  lastLevel: 0
   doubleDependency: 0
   dependency1: 1
   dependency2: 0
+  fader: {fileID: 135612752}
 --- !u!114 &1375421515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6208,6 +6369,18 @@ MonoBehaviour:
           m_StringArgument: Level 4
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 390406160}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1375421516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6228,7 +6401,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d74b43009531c0a45a223470179ec4d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03eb1f617a8481b4ebdf579e4e161945, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6384,6 +6557,18 @@ MonoBehaviour:
       - m_Target: {fileID: 390406160}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
         m_MethodName: LoadMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 390406160}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6558,10 +6743,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLevel: 0
-  lastLevel: 0
   doubleDependency: 0
   dependency1: 2
   dependency2: 0
+  fader: {fileID: 135612752}
 --- !u!114 &1433764237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6616,6 +6801,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Level 3
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 390406160}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1433764238
@@ -8128,6 +8325,18 @@ MonoBehaviour:
           m_StringArgument: Level 1
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 390406160}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: PlaySoundEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1894911328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8179,10 +8388,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLevel: 1
-  lastLevel: 0
   doubleDependency: 0
   dependency1: 0
   dependency2: 0
+  fader: {fileID: 135612752}
 --- !u!1 &1901065553
 GameObject:
   m_ObjectHideFlags: 0
@@ -9021,6 +9230,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5802538087296807016, guid: 1823d3400eca735459dcee69e09af1a9, type: 3}
+      propertyPath: isGameActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6149843123003648030, guid: 1823d3400eca735459dcee69e09af1a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 400.03372

@@ -4,6 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using System;
 
 public class UsualBallSpawner : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class UsualBallSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isGameActive = LevelManager.isGameActive;
+        isGameActive = GameManager.Instance.isGameActive;
         lastIndexes = new int[ballPrefabs.Length - 1];
 
         StartCoroutine(SpawnBalls());
@@ -28,7 +29,7 @@ public class UsualBallSpawner : MonoBehaviour
 
     private void Update()
     {
-        isGameActive = LevelManager.isGameActive;
+        isGameActive = GameManager.Instance.isGameActive;
     }
 
     IEnumerator SpawnBalls()
@@ -37,7 +38,7 @@ public class UsualBallSpawner : MonoBehaviour
         {
             int ballIndex = GetRandomNumber();
 
-            int xPos = Random.Range(-xRange, (xRange + 1));
+            int xPos = UnityEngine.Random.Range(-xRange, (xRange + 1));
 
             Vector3 spawnPos = new Vector3(xPos, transform.position.y, 0);
 
@@ -49,11 +50,11 @@ public class UsualBallSpawner : MonoBehaviour
 
     int GetRandomNumber()
     {
-        newIndex = Random.Range(0, ballPrefabs.Length);
+        newIndex = UnityEngine.Random.Range(0, ballPrefabs.Length);
 
-        while (ArrayUtility.Contains(lastIndexes, newIndex))
+        while (Array.Exists(lastIndexes, element => element == newIndex))
         {
-            newIndex = Random.Range(0, ballPrefabs.Length);
+            newIndex = UnityEngine.Random.Range(0, ballPrefabs.Length);
         } 
         
         for (int i = lastIndexes.Length - 1; i > 0; i--)

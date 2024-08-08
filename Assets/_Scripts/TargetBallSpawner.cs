@@ -6,23 +6,27 @@ using UnityEngine.UI;
 
 public class TargetBallSpawner : MonoBehaviour
 {
-    [SerializeField] bool isSpecial;
-    [SerializeField] GameObject[] animalPrefabs;
-
+    [Header("Normal game objects")]
     [SerializeField] GameObject ballPrefab;
     [SerializeField] Material[] coloredMaterials;
     private string[] tags = { "Blue", "Green", "Red", "Yellow", "Orange", "Purple", };
     private int colorIndex;
 
+    [Header("Cats level objects")]
+    [SerializeField] bool isSpecial;
+    [SerializeField] GameObject[] animalPrefabs;
+
+    [Header("Utilities")]
     [SerializeField] int minTargetRange;
     [SerializeField] int maxTargetRange;
-    private int difficulty;
+    private int difficulty;    
 
+    [Header("Effects and UI")]
     [SerializeField] GameObject targetText;
     private Text targetCountText;
 
     [SerializeField] AudioClip newTargetSound;
-    private AudioSource targetAudio;
+    [SerializeField] AudioClip destroySound;    
 
     [SerializeField] ParticleSystem destroyParticle;
 
@@ -45,7 +49,20 @@ public class TargetBallSpawner : MonoBehaviour
         {
             difficulty = GameManager.Instance.difficulties[level - 1];
         }
-        
+
+        StartSpawn();
+    }
+
+    private void Update()
+    {   
+        if (GameManager.Instance.isGameActive == false)
+        {
+            StopAllCoroutines();
+        }
+    }
+
+    public void StartSpawn()
+    {
         if (isSpecial)
         {
             SpawnRandomAnimal();
@@ -54,21 +71,11 @@ public class TargetBallSpawner : MonoBehaviour
         {
             SpawnRandomBall();
         }
-        
-        targetAudio = GetComponent<AudioSource>();
-    }
-
-    private void Update()
-    {
-        if (GameObject.Find("Level Manager").GetComponent<LevelManager>().isGameActive == false)
-        {
-            StopAllCoroutines();
-        }
     }
 
     void SpawnRandomBall()
     {   
-        if (GameObject.Find("Level Manager").GetComponent<LevelManager>().isGameActive)
+        if (GameManager.Instance.isGameActive)
         {
             GetRandomNumber(coloredMaterials.Length);
 
@@ -85,7 +92,7 @@ public class TargetBallSpawner : MonoBehaviour
 
     void SpawnRandomAnimal()
     {
-        if (GameObject.Find("Level Manager").GetComponent<LevelManager>().isGameActive)
+        if (GameManager.Instance.isGameActive)
         {
             GetRandomNumber(2);
 
@@ -138,7 +145,8 @@ public class TargetBallSpawner : MonoBehaviour
     {
         targetCountText.text = targetCount.ToString();
         yield return new WaitForSeconds(1.2f);
-        targetAudio.PlayOneShot(newTargetSound);
+        
+        AudioManager.Instance.PlaySound(newTargetSound, transform, 1f);
         targetText.SetActive(true);        
     }
 
@@ -147,6 +155,7 @@ public class TargetBallSpawner : MonoBehaviour
         targetText.SetActive(false);
 
         destroyParticle.Play();
+        AudioManager.Instance.PlaySound(destroySound, transform, 1f);
         Destroy(target);
 
         if (isSpecial)
